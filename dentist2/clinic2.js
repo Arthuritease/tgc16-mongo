@@ -12,7 +12,6 @@
         appt_id: 201,
         patient: {
           patient_id: 001,
-          name: "Tan Ah Kow",
           DOB: "1994-02-02",
           address: {
             street: "Woodlands Drive 72",
