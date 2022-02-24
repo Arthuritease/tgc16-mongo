@@ -118,3 +118,47 @@ db.listingsAndReviews.find({ '$or':[ { 'address.country':'Brazil' }, { 'address.
 Find all listings in Brazil or Canada. The listings from Brazil
 must have more than 3 bedrooms.
 db.listingsAndReviews.find({ '$or':[ { 'address.country':"Brazil", 'bedrooms':{ '$gt':3 } }, { 'address.country':'Canada' } ] },{ 'name':1, 'address.country':1, 'bedrooms':1 }).pretty()
+
+Find all listings that has been reviewd by Leslie
+In other words, we want to shortlist documents by a field in one of their embedded objects.
+
+db.listingsAndReviews.find({
+    'reviews':{
+        '$elemMatch':{
+            'reviewer_name':'Leslie'
+        }
+    }
+},{
+    'name':1,
+    'reviews.$':1
+}).pretty()
+
+##Matching by date
+ISO date: YYYY-MM-DD
+```
+
+
+db.listingsAndReviews.find({
+    'first_review':{
+        '$lte':ISODate("2018-12-31")
+    }
+},{
+    'name':1,
+    'first_review':1
+}).pretty()
+
+Finding by string patterns (regualr expressions)
+e.g  find listing with words 'spacious'
+```
+db.listingsAndReviews.find({
+    'name': {
+            '$regex':'Spacious', '$options':'i'
+        }
+    },{
+        'name':1
+    }
+)
+
+Finding number of ping/results that fit search criteria 
+
+db.listingsAndReviews.find().count()
