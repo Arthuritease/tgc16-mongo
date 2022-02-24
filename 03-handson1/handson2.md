@@ -111,12 +111,10 @@ Question 3B
 
 db.data.find({
     'wind.speed.rate':{
-        '$gte':5s
-    },
-    'wind.speed.rate':{
-        '$nin':["999.9"]
+        '$gte':5,
+        '$ne':999.9
     }
 },{
     '_id':1,
     'wind.speed.rate':1
-})
+}).pretty()
