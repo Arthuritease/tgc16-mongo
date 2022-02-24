@@ -154,3 +154,25 @@ db.animals.updateOne({
     }
 })
 ```
+
+## Update the fields of all sub documents that matches a critera
+
+```
+db.animals.updateOne(
+    {
+        '_id':ObjectId("62172c5d5e4cc3d0ca8b8407")
+    },
+    {
+        $set:{
+            'checkups.$[eachCheckup].diagnosis':'redacted'
+        }
+    },
+    {
+        arrayFilters:[
+            {
+                'eachCheckup.name':'Dr Chua'
+            }
+        ]
+    }
+)
+```
