@@ -59,7 +59,7 @@ db.students.updateOne({
 ```
 db.students.updateMany({},
     { $inc:{ 
-       'age':+1
+       'age':1
     }
     })
     ```
